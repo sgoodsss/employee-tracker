@@ -1,0 +1,28 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "A CLI app for managing a company's employee database using node.js, inquirer, and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgoodsss/employee-tracker.git"
+  },
+  "keywords": [
+    "CLI",
+    "MySQL",
+    "SQL",
+    "Node.js",
+    "Inquirer",
+    "Database"
+  ],
+  "author": "Sarah Goodell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sgoodsss/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/sgoodsss/employee-tracker#readme"
+}
