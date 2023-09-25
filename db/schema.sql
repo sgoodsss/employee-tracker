@@ -10,26 +10,26 @@ DROP TABLE IF EXISTS departments;
 -- Create departments table
 -- id
 -- name: varchar(30)
-CREATE TABLE departments {
-    id INT AUTO-INCREMENT,
+CREATE TABLE departments (
+    id INT AUTO-INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     PRIMARY KEY(id)
-};
+);
 
 -- Create roles table
 -- id int primary key
 -- title: varchar(30)
 -- salary: decimal
 -- department_id: int (foreign key)
-CREATE TABLE roles {
-    id INT AUTO-INCREMENT,
+CREATE TABLE roles (
+    id INT AUTO-INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary INT NOT NULL,
     department_id INT,
     PRIMARY KEY(id),
     FOREIGN KEY(department_id),
     REFERENCES departments(id)
-};
+);
 
 -- Create employees table
 -- id: int primary key
@@ -37,8 +37,8 @@ CREATE TABLE roles {
 -- last_name: varchar(30)
 -- role_id: int (foreign key)
 -- manager_id: int (reference to another employee)
-CREATE TABLE employees {
-    id INT AUTO-INCREMENT,
+CREATE TABLE employees (
+    id INT AUTO-INCREMENT PRIMARY KEY,
     PRIMARY KEY(id),
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
@@ -46,4 +46,4 @@ CREATE TABLE employees {
     FOREIGN KEY (role_id) REFERENCES roles(id),
     manager_id INT, 
     FOREIGN KEY (manager_id) REFERENCES employees(id)
-};
+);
