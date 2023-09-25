@@ -1,4 +1,4 @@
--- Inserts values into tables for testing purposes
+-- Test data to populate into tables
 INSERT INTO departments (name)
 VALUES
 (`Finance`),
