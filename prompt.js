@@ -3,8 +3,7 @@ const inquirer = require('inquirer');
 const fetch = require('node-fetch');
 const cTable = require('console.table');
 const mysql = require('mysql2');
-let db = require(`./db`)
-
+const connection = require(`./db/connection`)
 // TODO: Create an array of questions for user input
 // const questions = [
 //     {
@@ -111,21 +110,8 @@ function init() {
             switch (selection.menu) {
                 //if user selects `View All Departments`
                 case `View All Departments`:
-                    //how to not hardcode this
-                    // fetch(`http://localhost:3001/api/departments`)
-                    //     .then(response => {
-                    //         if (response.error) {
-                    //             return console.log(error)
-                    //         }
-                    //         return response.json();
-                    //     })
-                    //     .then (departmentData => {
-                    //         console.table(departmentData.data);
-                    //     })
-                    //     //Return to the menu
-                    //     .then(init);
-                    db.query(`SELECT * FROM departments`, function (err, results) {
-                        console.cTable(results);
+                    connection.query(`SELECT * FROM departments`, function (err, results) {
+                        console.table(results);
                       })
                     .then(init());
                     break;
@@ -150,5 +136,3 @@ function init() {
 
 // Function call to initialize app
 init();
-
-module.exports = { init };
