@@ -2,6 +2,7 @@
 const inquirer = require('inquirer');
 const fetch = require('node-fetch');
 const cTable = require('console.table');
+const db = require("./db")
 
 // TODO: Create an array of questions for user input
 // const questions = [
@@ -110,18 +111,22 @@ function init() {
                 //if user selects `View All Departments`
                 case `View All Departments`:
                     //how to not hardcode this
-                    fetch(`http://localhost:3001/api/departments`)
-                        .then(response => {
-                            if (response.error) {
-                                return console.log(error)
-                            }
-                            return response.json();
-                        })
-                        .then (departmentData => {
-                            console.table(departmentData.data);
-                        })
-                        //Return to the menu
-                        .then(init);
+                    // fetch(`http://localhost:3001/api/departments`)
+                    //     .then(response => {
+                    //         if (response.error) {
+                    //             return console.log(error)
+                    //         }
+                    //         return response.json();
+                    //     })
+                    //     .then (departmentData => {
+                    //         console.table(departmentData.data);
+                    //     })
+                    //     //Return to the menu
+                    //     .then(init);
+                    db.query(`SELECT * FROM departments`, function (err, results) {
+                        console.cTable(results);
+                      })
+                    .then(init());
                     break;
                 //if user selects `View All Roles`
                 //if user selects `View All Employees`
@@ -136,7 +141,7 @@ function init() {
             //From README assignment from here down
             // writeToFile(`Generated-README.md`, generateMarkdown(answers));
         })
-        .then(() => console.log(`Updated Company Database`))
+        .then(() => console.log(`Completed user request`))
         .catch((error) => {
            console.log(error)
         });

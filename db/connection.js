@@ -1,7 +1,20 @@
-const Sequelize = require('sequelize');
+//Stanley's version
+// const Sequelize = require('sequelize');
+// const URI = process.env.MYSQLURI
+// const sequelize = new Sequelize(URI);
+// module.exports = sequelize;
+const mysql = require(`mysql2`);
 
-const URI = process.env.MYSQLURI
+const connection = mysql.createConnection(
+    {
+      host: 'localhost',
+      // MySQL Username
+      user: 'root',
+      // TODO: Add MySQL Password
+      password: process.env.DBPASSWORD,
+      database: 'company'
+    },
+    console.log(`Connected to the company database.`)
+  );
 
-const sequelize = new Sequelize(URI);
-
-module.exports = sequelize;
+module.exports = { connection }
