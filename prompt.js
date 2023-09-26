@@ -2,7 +2,8 @@
 const inquirer = require('inquirer');
 const fetch = require('node-fetch');
 const cTable = require('console.table');
-const db = require("./db")
+const mysql = require('mysql2');
+let db = require(`./db`)
 
 // TODO: Create an array of questions for user input
 // const questions = [
