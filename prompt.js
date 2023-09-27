@@ -1,9 +1,9 @@
+require("dotenv").config();
 // Packages needed for this application
 const inquirer = require('inquirer');
-const fetch = require('node-fetch');
 const cTable = require('console.table');
 const mysql = require('mysql2');
-const connection = require(`./db/connection`)
+const connection = require("./db/connection")
 // TODO: Create an array of questions for user input
 // const questions = [
 //     {
@@ -111,9 +111,13 @@ function init() {
                 //if user selects `View All Departments`
                 case `View All Departments`:
                     connection.query(`SELECT * FROM departments`, function (err, results) {
-                        console.table(results);
+                        if(err) {
+                            console.log(err)
+                        } else{
+                            console.table(results);
+                            init();
+                        }
                       })
-                    .then(init());
                     break;
                 //if user selects `View All Roles`
                 //if user selects `View All Employees`
@@ -124,9 +128,7 @@ function init() {
 
             //End of switch statement
             }
-            
-            //From README assignment from here down
-            // writeToFile(`Generated-README.md`, generateMarkdown(answers));
+
         })
         .then(() => console.log(`Completed user request`))
         .catch((error) => {
