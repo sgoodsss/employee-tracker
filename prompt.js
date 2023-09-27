@@ -101,58 +101,80 @@ function init() {
         .prompt([
             {
                 type: 'list',
-                name: `menu`,
+                name: `main_menu`,
                 message: 'What would you like to do?',
                 choices: [`View All Departments`, `View All Roles`, `View All Employees`, `Add a Department`, `Add A Role`, `Add an Employee`, `Update an Employee Role`]
             }
         ])
         .then(selection => {
-            switch (selection.menu) {
+            switch (selection.main_menu) {
                 //if user selects `View All Departments`
                 case `View All Departments`:
                     connection.query(`SELECT * FROM departments`, function (err, results) {
-                        if(err) {
+                        if (err) {
                             console.log(err)
-                        } else{
+                        } else {
                             console.table(results);
                             init();
                         }
-                      })
+                    })
                     break;
                 //if user selects `View All Roles`
                 case `View All Roles`:
                     connection.query(`SELECT * FROM roles`, function (err, results) {
-                        if(err) {
+                        if (err) {
                             console.log(err)
-                        } else{
+                        } else {
                             console.table(results);
                             init();
                         }
-                      })
+                    })
                     break;
                 //if user selects `View All Employees`
                 case `View All Employees`:
                     connection.query(`SELECT * FROM employees`, function (err, results) {
-                        if(err) {
+                        if (err) {
                             console.log(err)
-                        } else{
+                        } else {
                             console.table(results);
                             init();
                         }
-                      })
+                    })
                     break;
                 //if user selects `Add a Department`
+                case `Add a Department`:
+                    return inquirer
+                        .prompt([
+                            {
+                                type: 'input',
+                                name: `dept_name`,
+                                message: 'What is the name of the Department you would like to add?',
+                            }
+                        ])
+                        .then(deptName => {
+                            const { name } = deptName.dept_name;
+                            connection.query(`INSERT INTO departments VALUES(${name})`, (err, results) => {
+                                if (err) {
+                                    console.log(err)
+                                } else {
+                                    console.table(results);
+                                    init();
+                                }
+                            })
+                        })
+                    break;
+
                 //if user selects `Add a Role`
                 //if user selects `Add an Employee`
                 //if user selects `Update an Employee Role`
 
-            //End of switch statement
+                //End of switch statement
             }
 
         })
         .then(() => console.log(`Completed user request`))
         .catch((error) => {
-           console.log(error)
+            console.log(error)
         });
 }
 
