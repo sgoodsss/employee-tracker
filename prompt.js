@@ -120,7 +120,27 @@ function init() {
                       })
                     break;
                 //if user selects `View All Roles`
+                case `View All Roles`:
+                    connection.query(`SELECT * FROM roles`, function (err, results) {
+                        if(err) {
+                            console.log(err)
+                        } else{
+                            console.table(results);
+                            init();
+                        }
+                      })
+                    break;
                 //if user selects `View All Employees`
+                case `View All Employees`:
+                    connection.query(`SELECT * FROM employees`, function (err, results) {
+                        if(err) {
+                            console.log(err)
+                        } else{
+                            console.table(results);
+                            init();
+                        }
+                      })
+                    break;
                 //if user selects `Add a Department`
                 //if user selects `Add a Role`
                 //if user selects `Add an Employee`
@@ -138,3 +158,11 @@ function init() {
 
 // Function call to initialize app
 init();
+
+//DELETE example
+// db.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     }
+//     console.log(result);
+//   });
