@@ -11,8 +11,8 @@ VALUES
 ('Operations'),
 ('Management');
 
-INSERT INTO roles (title, salary, department_id)
-VALUES
+INSERT INTO roles (title, salary, department_id) 
+VALUES 
 ('Accountant', 60000, 1),
 ('Financial Analyst', 71000, 1),
 ('Marketing Manager', 140000, 2),
