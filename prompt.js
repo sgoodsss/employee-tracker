@@ -45,6 +45,7 @@ function init() {
                 case `Add an Employee`:
                     addEmployee();
                     break;
+
                 //if user selects `Update an Employee Role`
                 case `Update an Employee Role`:
                     updateEmployeeRole();
@@ -118,13 +119,14 @@ function addDepartment() {
     })
 }
 
+//Not working
 function addRole() {
     connection.query(`SELECT * FROM departments`, function (err, results) {
         if (err) {
             console.log(err);
         } else {
             console.table(results);
-            inquirer
+            return inquirer
             .prompt([
                 {
                     type: "input",
@@ -143,6 +145,23 @@ function addRole() {
                     choices: results.map((department) => department.name),
                   },
             ])
+            .then((answers) => {
+                const roleName = answers.role_name;
+                const roleSalary = answers.role_salary;
+                const roleDept = answers.role_dept;
+                connection.query(`INSERT INTO roles (title, salary, department_id) VALUES ("${roleName}", "${roleSalary}", "${roleDept}")`, function (err, results) {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log(`${roleName} was added to Roles`)
+                        init();
+                    }
+                })
+            })
         }
     })
+}
+
+function updateEmployeeRole () {
+    console.log(`Updated Employee Role`)
 }
