@@ -1,7 +1,6 @@
 require("dotenv").config();
 // Packages needed for this application
 const inquirer = require('inquirer');
-const cTable = require('console.table');
 const mysql = require('mysql2');
 const connection = require("./db/connection")
 
@@ -19,39 +18,23 @@ function init() {
             switch (selection.main_menu) {
                 //if user selects `View All Departments`
                 case `View All Departments`:
-                    connection.query(`SELECT * FROM departments`, function (err, results) {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            console.table(results);
-                            init();
-                        }
-                    })
+                    viewDepartments();
                     break;
+
                 //if user selects `View All Roles`
                 case `View All Roles`:
-                    connection.query(`SELECT * FROM roles`, function (err, results) {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            console.table(results);
-                            init();
-                        }
-                    })
+                    viewRoles();
                     break;
+
                 //if user selects `View All Employees`
                 case `View All Employees`:
-                    connection.query(`SELECT * FROM employees`, function (err, results) {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            console.table(results);
-                            init();
-                        }
-                    })
+                    viewEmployees();
                     break;
+
                 //if user selects `Add a Department`
                 case `Add a Department`:
+                    addDepartment();
+
                     return inquirer
                         .prompt([
                             {
@@ -75,6 +58,7 @@ function init() {
 
                 //if user selects `Add a Role`
                 case `Add a Role`:
+                    addRole();
                     connection.query(`SELECT name FROM departments`, async (err,results) => {
                         if (err) {
                             console.log(err)
@@ -109,10 +93,15 @@ function init() {
                             })
                         })
                     break;
-                //if user selects `Add an Employee`
-                
-                //if user selects `Update an Employee Role`
 
+                //if user selects `Add an Employee`
+                case `Add an Employee`:
+                    addEmployee();
+                    break;
+                //if user selects `Update an Employee Role`
+                case `Update an Employee Role`:
+                    updateEmployeeRole();
+                    break;
                 //End of switch statement
             }
 
@@ -126,10 +115,35 @@ function init() {
 // Function call to initialize app
 init();
 
-//DELETE example
-// connection.query(`DELETE FROM course_names WHERE id = ?`, 3, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     console.log(result);
-//   });
+function viewDepartments() {
+    connection.query(`SELECT * FROM departments`, function (err, results) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.table(results);
+            init();
+        }
+    })
+}
+
+function viewRoles() {
+    connection.query(`SELECT * FROM roles`, function (err, results) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.table(results);
+            init();
+        }
+    })
+}
+
+function viewEmployees() {
+    connection.query(`SELECT * FROM employees`, function (err, results) {
+        if (err) {
+            console.log(err)
+        } else {
+            console.table(results);
+            init();
+        }
+    }) 
+}
