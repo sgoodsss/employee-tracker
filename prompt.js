@@ -34,64 +34,11 @@ function init() {
                 //if user selects `Add a Department`
                 case `Add a Department`:
                     addDepartment();
-
-                    return inquirer
-                        .prompt([
-                            {
-                                type: 'input',
-                                name: `dept_name`,
-                                message: 'What is the name of the Department you would like to add?',
-                            }
-                        ])
-                        .then(deptName => {
-                            const name = deptName.dept_name;
-                            connection.query(`INSERT INTO departments (name) VALUES ("${name}")`, (err, results) => {
-                                if (err) {
-                                    console.log(err)
-                                } else {
-                                    console.log(`${name} was added to Departments`)
-                                    init();
-                                }
-                            })
-                        })
                     break;
 
                 //if user selects `Add a Role`
                 case `Add a Role`:
                     addRole();
-                    connection.query(`SELECT name FROM departments`, async (err,results) => {
-                        if (err) {
-                            console.log(err)
-                        } else {
-                            const results = await results
-                            const deptArray = []
-                            console.log(results)
-                        }
-                    })
-                    return inquirer
-                        .prompt([
-                            {
-                                type: 'input',
-                                name: `role_name`,
-                                message: 'What is the name of the Role you would like to add?',
-                            },
-                            {
-                                type: 'input',
-                                name: `role_salary`,
-                                message: 'What is the name of the Role you would like to add?',
-                            }
-                        ])
-                        .then(deptName => {
-                            const name = deptName.dept_name;
-                            connection.query(`INSERT INTO departments (name) VALUES ("${name}")`, (err, results) => {
-                                if (err) {
-                                    console.log(err)
-                                } else {
-                                    console.log(`${name} was added to Departments`)
-                                    init();
-                                }
-                            })
-                        })
                     break;
 
                 //if user selects `Add an Employee`
@@ -146,4 +93,56 @@ function viewEmployees() {
             init();
         }
     }) 
+}
+
+
+function addDepartment() {
+    return inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: `dept_name`,
+            message: 'What is the name of the Department you would like to add?',
+        }
+    ])
+    .then(deptName => {
+        const name = deptName.dept_name;
+        connection.query(`INSERT INTO departments (name) VALUES ("${name}")`, (err, results) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(`${name} was added to Departments`)
+                init();
+            }
+        })
+    })
+}
+
+function addRole() {
+    connection.query(`SELECT * FROM departments`, function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.table(results);
+            inquirer
+            .prompt([
+                {
+                    type: "input",
+                    name: `role_name`,
+                    message: "What is the name of the Role you would like to add?",
+                },
+                {
+                    type: "input",
+                    name: `role_salary`,
+                    message: "What is the salary of the Role you would like to add?",
+                },
+                {
+                    type: "list",
+                    name: `role_dept`,
+                    message: "What department does this role belong to?",
+                    choices: results.map((department) => department.name),
+                  },
+            ])
+        }
+    })
 }
