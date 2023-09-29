@@ -140,7 +140,10 @@ function addRole() {
                     type: "list",
                     name: `role_dept`,
                     message: "What department does this role belong to?",
-                    choices: results.map((department) => department.name),
+                    choices: results.map(({ id, name }) => ({
+                        name: name,
+                        value: id
+                      })),
                   },
             ])
             .then((answers) => {
