@@ -11,7 +11,7 @@ function init() {
                 type: 'list',
                 name: `main_menu`,
                 message: 'What would you like to do?',
-                choices: [`View All Departments`, `View All Roles`, `View All Employees`, `Add a Department`, `Add A Role`, `Add an Employee`, `Update an Employee Role`]
+                choices: [`View All Departments`, `View All Roles`, `View All Employees`, `Add a Department`, `Add a Role`, `Add an Employee`, `Update an Employee Role`]
             }
         ])
         .then(selection => {
@@ -59,7 +59,6 @@ function init() {
             console.log(error)
         });
 }
-
 // Function call to initialize app
 init();
 
@@ -95,7 +94,6 @@ function viewEmployees() {
         }
     }) 
 }
-
 
 function addDepartment() {
     return inquirer
@@ -160,6 +158,10 @@ function addRole() {
             })
         }
     })
+}
+
+function addEmployee () {
+    console.log(`Added new Employee`)
 }
 
 function updateEmployeeRole () {
