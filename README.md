@@ -1,34 +1,37 @@
-# employee-tracker
-A command-line application for managing a company's employee database.  Uses Node.js, Inquirer, and MySQL.
+# Employee Tracker
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-GIVEN a command-line application that accepts user input
-WHEN I start the application
-THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
-WHEN I choose to view all departments
-THEN I am presented with a formatted table showing department names and department ids
-WHEN I choose to view all roles
-THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
-WHEN I choose to view all employees
-THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
-WHEN I choose to add a department
-THEN I am prompted to enter the name of the department and that department is added to the database
-WHEN I choose to add a role
-THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
-WHEN I choose to add an employee
-THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
-WHEN I choose to update an employee role
-THEN I am prompted to select an employee to update and their new role and this information is updated in the database
+  ## Description
 
-Bonus
-Try to add some additional functionality to your application, such as the ability to do the following:
+  A command-line application for managing a company's employee database. Uses Node.js, Inquirer, and MySQL.
 
-Update employee managers.
+  ## Table of Contents 
 
-View employees by manager.
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Credits](#credits)
+  - [License](#license)
 
-View employees by department.
+  ## Installation
+    On the homepage of my repo, click on the green Code button. Download the zip file and copy it to a directory of your choice or clone to a directory of your choice using your terminal. Open the file in VS Code. Open the terminal in VS Code and make sure you’re in the root directory ‘employee-tracker'. You’ll now be ready to run the app!
+  
 
-Delete departments, roles, and employees.
+  ## Usage
+    After installation is complete, run the command `npm i` to install the packages need for this application.  Next, connect to MySQL using `mysql -u root -p` and enter your password.  Use the schema.sql and seeds.sql to set up the database.  Finally, run `npm start` the terminal. Answer the prompts to interact with the database.  Please watch the video linked below for a tutorial.
+  
 
-View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
+  ## Credits
+    Instead change the require of index.js, to a dynamic import() which is available in all CommonJS modules. (2021, December 31). Stack Overflow. Retrieved September 25, 2023, from https://stackoverflow.com/questions/70541068/instead-change-the-require-of-index-js-to-a-dynamic-import-which-is-available
 
+    javascript - Inquirer on node.js. (2022, June 30). Stack Overflow. Retrieved September 25, 2023, from https://stackoverflow.com/questions/72812022/inquirer-on-node-js
+
+    W3Schools. (n.d.). JavaScript Switch Statement. W3Schools. Retrieved September 25, 2023, from https://www.w3schools.com/jsref/jsref_switch.asp
+
+  ## License
+  Please refer to the LICENSE in my repo.
+  https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt
+
+
+  ## Additional Questions
+  github.com/sgoodsss
+  Email: sarahlgoodell1@gmail.com
