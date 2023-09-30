@@ -117,7 +117,6 @@ function addDepartment() {
     })
 }
 
-//Not working
 function addRole() {
     connection.query(`SELECT * FROM departments`, function (err, results) {
         if (err) {
@@ -139,7 +138,7 @@ function addRole() {
                 {
                     type: "list",
                     name: `role_dept`,
-                    message: "What department does this role belong to?",
+                    message: "What department does this Role belong to?",
                     choices: results.map(({ id, name }) => ({
                         name: name,
                         value: id
@@ -164,7 +163,58 @@ function addRole() {
 }
 
 function addEmployee () {
-    console.log(`Added new Employee`)
+    connection.query(`SELECT * FROM roles`, function (err, results) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.table(results);
+            return inquirer
+            .prompt([
+                {
+                    type: "input",
+                    name: `first_name`,
+                    message: "What is the first name of the Employee you would like to add?",
+                },
+                {
+                    type: "input",
+                    name: `last_name`,
+                    message: "What is the last name of the Employee you would like to add?",
+                },
+                {
+                    type: "list",
+                    name: `employee_role`,
+                    message: "What role is assigned to this Employee?",
+                    choices: results.map(({ id, title }) => ({
+                        title: title,
+                        value: id
+                      })),
+                  },
+                  {
+                    type: "list",
+                    name: `employee_manager`,
+                    message: "What manager is assigned to this Employee?",
+                    choices: results.map(({ id, manager_id }) => ({
+                        manager_id: manager_id,
+                        value: id
+                      })),
+                  },
+            ])
+            .then((answers) => {
+                const employeeFirstName = answers.first_name;
+                const employeeLastName = answers.last_name;
+                const empRole = answers.employee_role;
+                const empManager = answers.employee_manager;
+                connection.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("${employeeFirstName}", "${employeeLastName}", "${empRole}", "${empManager}")`, function (err, results) {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log(`${employeeFirstName} ${employeeLastName} was added to Employees`)
+                        init();
+                    }
+                })
+            })
+        }
+    })
 }
 
 function updateEmployeeRole () {
