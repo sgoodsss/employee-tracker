@@ -18,7 +18,8 @@
 
   ## Usage
   After installation is complete, run the command `npm i` to install the packages need for this application.  Next, connect to MySQL using `mysql -u root -p` and enter your password.  Use the schema.sql and seeds.sql to set up the database.  Finally, run `npm start` the terminal. Answer the prompts to interact with the database.  Please watch the video linked below for a tutorial.
-  
+
+  https://drive.google.com/file/d/1bfvyG6WCyElXsPdwi03rg7Z0ksKbJBJi/view?usp=sharing
 
   ## Credits
   Instead change the require of index.js, to a dynamic import() which is available in all CommonJS modules. (2021, December 31). Stack Overflow. Retrieved September 25, 2023, from https://stackoverflow.com/questions/70541068/instead-change-the-require-of-index-js-to-a-dynamic-import-which-is-available
